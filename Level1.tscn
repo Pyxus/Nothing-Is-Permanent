@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Platform.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://AreaGrid.gd" type="Script" id=3]
 
 [node name="Level1" type="Node2D"]
 
@@ -11,84 +11,7 @@ z_index = 1
 collision_layer = 3
 collision_mask = 3
 
-[node name="Platform" parent="." instance=ExtResource( 1 )]
-light_mask = 0
-position = Vector2( 112, 505 )
-
-[node name="Platform2" parent="." instance=ExtResource( 1 )]
-light_mask = 0
-position = Vector2( 304, 505 )
-
-[node name="Platform3" parent="." instance=ExtResource( 1 )]
-light_mask = 0
-position = Vector2( 494, 507 )
-
-[node name="Platform4" parent="." instance=ExtResource( 1 )]
-light_mask = 0
-position = Vector2( 684, 507 )
-
-[node name="Platform5" parent="." instance=ExtResource( 1 )]
-light_mask = 0
-position = Vector2( 876, 507 )
-
-[node name="Platform6" parent="." instance=ExtResource( 1 )]
-light_mask = 0
-position = Vector2( 112, 357 )
-
-[node name="Platform7" parent="." instance=ExtResource( 1 )]
-light_mask = 0
-position = Vector2( 304, 357 )
-
-[node name="Platform8" parent="." instance=ExtResource( 1 )]
-light_mask = 0
-position = Vector2( 494, 359 )
-
-[node name="Platform9" parent="." instance=ExtResource( 1 )]
-light_mask = 0
-position = Vector2( 684, 359 )
-
-[node name="Platform10" parent="." instance=ExtResource( 1 )]
-light_mask = 0
-position = Vector2( 876, 359 )
-
-[node name="Platform11" parent="." instance=ExtResource( 1 )]
-light_mask = 0
-position = Vector2( 114, 211 )
-
-[node name="Platform12" parent="." instance=ExtResource( 1 )]
-light_mask = 0
-position = Vector2( 306, 211 )
-
-[node name="Platform13" parent="." instance=ExtResource( 1 )]
-light_mask = 0
-position = Vector2( 496, 213 )
-
-[node name="Platform14" parent="." instance=ExtResource( 1 )]
-light_mask = 0
-position = Vector2( 686, 213 )
-
-[node name="Platform15" parent="." instance=ExtResource( 1 )]
-light_mask = 0
-position = Vector2( 878, 213 )
-
-[node name="Platform16" parent="." instance=ExtResource( 1 )]
-light_mask = 0
-position = Vector2( 114, 65 )
-
-[node name="Platform17" parent="." instance=ExtResource( 1 )]
-light_mask = 0
-position = Vector2( 306, 65 )
-
-[node name="Platform18" parent="." instance=ExtResource( 1 )]
-light_mask = 0
-position = Vector2( 496, 67 )
-
-[node name="Platform19" parent="." instance=ExtResource( 1 )]
-light_mask = 0
-position = Vector2( 686, 67 )
-
-[node name="Platform20" parent="." instance=ExtResource( 1 )]
-light_mask = 0
-position = Vector2( 878, 67 )
-
-[connection signal="area_entered" from="Platform" to="Player" method="_on_Platform_area_entered"]
+[node name="AreaMap" type="Node2D" parent="."]
+script = ExtResource( 3 )
+grid_size = Vector2( 8, 9 )
+cell_size = Vector2( 100, 100 )
