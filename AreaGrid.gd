@@ -35,10 +35,8 @@ func _ready() -> void:
 				area.add_child(texture_rect)
 				area.add_child(collision)
 				area.connect("body_entered", self, "_on_Area_body_entered", [Vector2(x, y)])
-				
-		get_cell(2, 1).modulate = Color.red
-				
-				
+
+
 func get_cell(cell_x: int, cell_y: int) -> Area2D:
 	var x := 0
 	var y := 0
