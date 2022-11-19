@@ -3,7 +3,7 @@ var moveSpeed : int = 250
 var defaultSpeed = 250
 var vel : Vector2 = Vector2()
 var facingDir : Vector2 = Vector2()
-onready var rayCast = get_node("RayCast2D")
+
 var canDash = true
 var dashing = false
 
