@@ -9,16 +9,16 @@ export var cell_size: Vector2 setget set_cell_size
 
 func _draw() -> void:
 	if Engine.editor_hint:
-		for x in grid_size.x:
-			for y in grid_size.y:
+		for y in grid_size.y:
+			for x in grid_size.x:
 				var cell_pos := Vector2(x * cell_size.x, y * cell_size.y)
 				draw_rect(Rect2(cell_pos, cell_size), Color(randf(), randf(), randf(), .5))
 
 
 func _ready() -> void:
 	if not Engine.editor_hint:
-		for x in grid_size.x:
-			for y in grid_size.y:
+		for y in grid_size.y:
+			for x in grid_size.x:
 				var area := Area2D.new()
 				var collision := CollisionShape2D.new()
 				var shape := RectangleShape2D.new()
@@ -29,14 +29,30 @@ func _ready() -> void:
 				shape.extents = cell_size
 				collision.shape = shape
 				area.position = Vector2(x * cell_size.x, y * cell_size.y)
-				texture_rect.rect_position = Vector2(x * cell_size.x, y * cell_size.y)
 				texture_rect.rect_size = cell_size
 
 				add_child(area)
-				add_child(texture_rect)
+				area.add_child(texture_rect)
 				area.add_child(collision)
 				area.connect("body_entered", self, "_on_Area_body_entered", [Vector2(x, y)])
 				
+		get_cell(2, 1).modulate = Color.red
+				
+				
+func get_cell(cell_x: int, cell_y: int) -> Area2D:
+	var x := 0
+	var y := 0
+	
+	for child in get_children():
+		if cell_x == x and cell_y == y:
+			return child
+		
+		x += 1
+		if x % int(grid_size.x) == 0:
+			y += 1
+			x = 0
+
+	return null
 
 
 func set_grid_size(value: Vector2) -> void:
