@@ -3,7 +3,8 @@ var moveSpeed : int = 250
 var defaultSpeed = 250
 var vel : Vector2 = Vector2()
 var facingDir : Vector2 = Vector2()
-
+var hasKey = false
+var hasWaterBucket = false
 var canDash = true
 var dashing = false
 
@@ -32,3 +33,14 @@ func _physics_process(delta):
 
 	# move the player
 	move_and_slide(vel * moveSpeed)
+	
+	for index in get_slide_count():
+		var collision = get_slide_collision(index)
+		if collision.collider.name.begins_with("Wall") and hasKey:
+			collision.collider.queue_free()
+			hasKey = false
+		if collision.collider.name.begins_with("Flower"):
+			print("FUCK YOU")
+
+func setKey(haveKey):
+	hasKey = haveKey
