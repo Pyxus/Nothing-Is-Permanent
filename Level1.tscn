@@ -19,9 +19,9 @@ grid_size = Vector2( 8, 9 )
 cell_size = Vector2( 100, 100 )
 
 [node name="TextureRect" type="TextureRect" parent="."]
-margin_left = -120.0
-margin_top = 18.0
-margin_right = -18.0
-margin_bottom = 114.0
+margin_left = -438.0
+margin_top = 102.0
+margin_right = -336.0
+margin_bottom = 198.0
 texture = ExtResource( 1 )
 expand = true
