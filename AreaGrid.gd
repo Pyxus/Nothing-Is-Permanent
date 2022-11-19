@@ -3,6 +3,7 @@ extends Node2D
 
 signal body_entered(body, cell_coord)
 
+export var texture: Texture
 export var grid_size: Vector2 setget set_grid_size
 export var cell_size: Vector2 setget set_cell_size
 
@@ -21,12 +22,18 @@ func _ready() -> void:
 				var area := Area2D.new()
 				var collision := CollisionShape2D.new()
 				var shape := RectangleShape2D.new()
-
+				var texture_rect := TextureRect.new()
+				
+				texture_rect.texture = texture
+				texture_rect.expand = true
 				shape.extents = cell_size
 				collision.shape = shape
 				area.position = Vector2(x * cell_size.x, y * cell_size.y)
+				texture_rect.rect_position = Vector2(x * cell_size.x, y * cell_size.y)
+				texture_rect.rect_size = cell_size
 
 				add_child(area)
+				add_child(texture_rect)
 				area.add_child(collision)
 				area.connect("body_entered", self, "_on_Area_body_entered", [Vector2(x, y)])
 				
