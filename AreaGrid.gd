@@ -24,17 +24,18 @@ func _ready() -> void:
 				var shape := RectangleShape2D.new()
 				var texture_rect := TextureRect.new()
 				
-				texture_rect.texture = texture
-				texture_rect.expand = true
-				shape.extents = cell_size
-				collision.shape = shape
-				area.position = Vector2(x * cell_size.x, y * cell_size.y)
-				texture_rect.rect_size = cell_size
-
 				add_child(area)
 				area.add_child(texture_rect)
 				area.add_child(collision)
 				area.connect("body_entered", self, "_on_Area_body_entered", [Vector2(x, y)])
+				
+				texture_rect.texture = texture
+				texture_rect.expand = true
+				shape.extents = cell_size / 2
+				collision.shape = shape
+				collision.position = cell_size / 2
+				area.position = Vector2(x * cell_size.x, y * cell_size.y)
+				texture_rect.rect_size = cell_size
 
 
 func get_cell(cell_x: int, cell_y: int) -> Area2D:
