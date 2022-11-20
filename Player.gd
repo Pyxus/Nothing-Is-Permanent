@@ -4,6 +4,7 @@ var defaultSpeed = 250
 var vel : Vector2 = Vector2()
 var facingDir : Vector2 = Vector2()
 var hasKey = false
+var cutCount: int = 1
 
 func _physics_process(delta):
 	moveSpeed = defaultSpeed
@@ -39,6 +40,10 @@ func _physics_process(delta):
 		$AnimationPlayer.play("Walk_Right")
 		vel.x += 1
 		facingDir = Vector2(1, 0)
+	
+	if Input.is_action_just_pressed("ui_select"):
+		use_scissors()
+
 	vel = vel.normalized()
 
 	# move the player
@@ -51,6 +56,16 @@ func _physics_process(delta):
 			hasKey = false
 		if collision.collider.name.begins_with("Flower"):
 			get_parent().player_touched_flower()
+
+func use_scissors():
+	if cutCount > 0:
+		$ScissorArea.monitoring = true
+		$ScissorArea.monitorable = false
+		
+		# Will set to false on the next frame
+		$ScissorArea.set_deferred("monitoring", false)
+		$ScissorArea.set_deferred("monitorable", false)
+		cutCount -= 1
 
 func all_sprites_invisible():
 	$Stop.visible = false
