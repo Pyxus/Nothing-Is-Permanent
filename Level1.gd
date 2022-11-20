@@ -29,7 +29,7 @@ func _on_AreaGrid_body_entered(body: PhysicsBody2D, coord: Vector2) -> void:
 		if _area_grid.get_cell(coord.x, coord.y).modulate == Color.purple:
 			kill_player()
 		else:
-			_area_grid.get_cell(coord.x, coord.y).modulate = Color.red
+			_area_grid.set_dying(_area_grid.get_cell(coord.x, coord.y))
 
 func kill_player():
 	get_tree().change_scene("res://game over screen.tscn")

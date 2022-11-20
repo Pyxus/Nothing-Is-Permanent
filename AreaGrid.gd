@@ -6,7 +6,47 @@ signal body_entered(body, cell_coord)
 export var texture: Texture
 export var grid_size: Vector2 setget set_grid_size
 export var cell_size: Vector2 setget set_cell_size
-
+export(Array,Texture) var TEXTURE_VARIATIONS_ARRAY: Array = [
+	preload("res://FloorTextures/000.png"),
+	preload("res://FloorTextures/001.png"),
+	preload("res://FloorTextures/002.png"),
+	preload("res://FloorTextures/003.png"),
+	preload("res://FloorTextures/004.png"),
+	preload("res://FloorTextures/005.png"),
+	preload("res://FloorTextures/006.png"),
+	preload("res://FloorTextures/007.png"),
+	preload("res://FloorTextures/008.png"),
+	preload("res://FloorTextures/009.png"),
+	preload("res://FloorTextures/010.png"),
+	preload("res://FloorTextures/011.png"),
+	preload("res://FloorTextures/012.png"),
+	preload("res://FloorTextures/013.png"),
+	preload("res://FloorTextures/014.png"),
+	preload("res://FloorTextures/015.png"),
+	preload("res://FloorTextures/016.png"),
+	preload("res://FloorTextures/017.png"),
+	preload("res://FloorTextures/018.png"),
+	preload("res://FloorTextures/019.png"),
+	preload("res://FloorTextures/020.png"),
+	preload("res://FloorTextures/021.png"),
+	preload("res://FloorTextures/022.png"),
+	preload("res://FloorTextures/023.png"),
+	preload("res://FloorTextures/024.png"),
+	preload("res://FloorTextures/025.png"),
+	preload("res://FloorTextures/026.png"),
+	preload("res://FloorTextures/027.png"),
+	preload("res://FloorTextures/028.png"),
+	preload("res://FloorTextures/029.png"),
+	preload("res://FloorTextures/030.png"),
+	preload("res://FloorTextures/031.png"),
+	preload("res://FloorTextures/033.png"),
+	preload("res://FloorTextures/034.png"),
+	preload("res://FloorTextures/035.png"),
+	preload("res://FloorTextures/036.png"),
+	preload("res://FloorTextures/037.png"),
+	preload("res://FloorTextures/038.png"),
+	preload("res://FloorTextures/039.png"),
+]
 func _draw() -> void:
 	if Engine.editor_hint:
 		for y in grid_size.y:
@@ -23,7 +63,9 @@ func spawn_rose_bushes():
 			var currCell = get_cell(x,y)
 			if currCell.modulate == Color.red:
 				kill_cell(currCell)
-
+func set_dying(cell):
+	cell.modulate = Color.red
+	
 func kill_cell(cell):
 	cell.modulate = Color.purple				
 
@@ -56,7 +98,7 @@ func _ready() -> void:
 				area.add_child(collision)
 				area.connect("body_entered", self, "_on_Area_body_entered", [Vector2(x, y)])
 				
-				texture_rect.texture = texture
+				texture_rect.texture = get_random_ground_texture()
 				texture_rect.expand = true
 				shape.extents = cell_size / 2
 				collision.shape = shape
@@ -64,6 +106,11 @@ func _ready() -> void:
 				area.position = Vector2(x * cell_size.x, y * cell_size.y)
 				texture_rect.rect_size = cell_size
 
+func get_random_ground_texture():
+	if TEXTURE_VARIATIONS_ARRAY.size() >1:
+		var texture_id: int = randi() % TEXTURE_VARIATIONS_ARRAY.size()
+		var chosen_texture: Texture = TEXTURE_VARIATIONS_ARRAY[texture_id]
+		return chosen_texture
 
 func get_cell(cell_x: int, cell_y: int) -> Area2D:
 	var x := 0

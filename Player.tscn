@@ -7,7 +7,7 @@
 [ext_resource path="res://Robot-walking-up (1).png" type="Texture" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 33.5, 46 )
+extents = Vector2( 15.5, 31 )
 
 [sub_resource type="Animation" id=2]
 resource_name = "Walk_Down"
@@ -98,12 +98,12 @@ position = Vector2( 0, -1 )
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -0.5, -1 )
+position = Vector2( 0.5, -1 )
 shape = SubResource( 1 )
 
 [node name="Walk_Left" type="Sprite" parent="."]
 position = Vector2( 1, 0 )
-scale = Vector2( 2.40385, 2.25 )
+scale = Vector2( 2, 2 )
 texture = ExtResource( 1 )
 vframes = 6
 
@@ -116,24 +116,24 @@ anims/stop = SubResource( 6 )
 
 [node name="Walk_Right" type="Sprite" parent="."]
 position = Vector2( 1, 1 )
-scale = Vector2( 2.51282, 2.28846 )
+scale = Vector2( 2, 2 )
 texture = ExtResource( 3 )
 vframes = 6
 
 [node name="Walk_Backwards" type="Sprite" parent="."]
 position = Vector2( 1, 1 )
-scale = Vector2( 2.51282, 2.28846 )
+scale = Vector2( 2, 2 )
 texture = ExtResource( 4 )
 vframes = 4
 
 [node name="Stop" type="Sprite" parent="."]
 position = Vector2( 1, 1 )
-scale = Vector2( 2.51282, 2.28846 )
+scale = Vector2( 2, 2 )
 texture = ExtResource( 4 )
 vframes = 4
 
 [node name="Walk_Up" type="Sprite" parent="."]
 position = Vector2( 1, 1 )
-scale = Vector2( 2.51282, 2.28846 )
+scale = Vector2( 2, 2 )
 texture = ExtResource( 5 )
 vframes = 4
