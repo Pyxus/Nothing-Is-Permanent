@@ -1,0 +1,114 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://arcadeclassic/ARCADECLASSIC.TTF" type="DynamicFontData" id=1]
+[ext_resource path="res://Title_Theme.ogg" type="AudioStream" id=2]
+[ext_resource path="res://credits.gd" type="Script" id=3]
+
+[sub_resource type="DynamicFont" id=2]
+size = 41
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 41
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFontData" id=1]
+font_path = "res://arcadeclassic/ARCADECLASSIC.TTF"
+
+[sub_resource type="DynamicFont" id=4]
+size = 207
+font_data = SubResource( 1 )
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer2"]
+margin_left = 31.0
+margin_top = 342.0
+margin_right = 157.0
+margin_bottom = 410.0
+rect_scale = Vector2( 2, 2 )
+text = "Developers
+John Mulholland
+Ezekiel Halley
+Michael Williams"
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="CanvasLayer2"]
+margin_left = 713.0
+margin_top = 335.0
+margin_right = 855.0
+margin_bottom = 418.0
+rect_scale = Vector2( 2, 2 )
+text = "Art
+Kaya(@DeadDragon)
+Emma Arroyo
+Allison Rogers
+
+"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="CanvasLayer2"]
+margin_left = 383.0
+margin_top = 337.0
+margin_right = 502.0
+margin_bottom = 420.0
+rect_scale = Vector2( 2, 2 )
+text = "Music/SFX
+Stephen Cromwell
+Allison Rogers"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer2"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -133.0
+margin_top = -153.0
+margin_right = 134.0
+margin_bottom = 13.0
+
+[node name="Start" type="Button" parent="CanvasLayer2/VBoxContainer"]
+margin_right = 267.0
+margin_bottom = 49.0
+custom_fonts/font = SubResource( 2 )
+text = "Start"
+
+[node name="Quit" type="Button" parent="CanvasLayer2/VBoxContainer"]
+margin_top = 53.0
+margin_right = 267.0
+margin_bottom = 102.0
+custom_fonts/font = SubResource( 3 )
+text = "Quit"
+
+[node name="Home" type="Button" parent="CanvasLayer2/VBoxContainer"]
+margin_top = 106.0
+margin_right = 267.0
+margin_bottom = 155.0
+custom_fonts/font = SubResource( 3 )
+text = "Home"
+
+[node name="Label" type="Label" parent="CanvasLayer2"]
+anchor_left = 0.547
+anchor_top = 0.5
+anchor_right = 0.547
+anchor_bottom = 0.5
+margin_left = -512.128
+margin_top = -329.0
+margin_right = 457.872
+margin_bottom = -118.0
+custom_colors/font_color = Color( 0.752941, 0.443137, 0, 1 )
+custom_colors/font_color_shadow = Color( 1, 1, 1, 1 )
+custom_constants/shadow_offset_x = -13
+custom_fonts/font = SubResource( 4 )
+text = "Game Jam!"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+autoplay = true
+
+[connection signal="pressed" from="CanvasLayer2/VBoxContainer/Start" to="." method="_on_Start_pressed"]
+[connection signal="pressed" from="CanvasLayer2/VBoxContainer/Quit" to="." method="_on_Quit_pressed"]
+[connection signal="pressed" from="CanvasLayer2/VBoxContainer/Home" to="." method="_on_Home_pressed"]

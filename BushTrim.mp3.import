@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/BushTrim.mp3-4eb5212de7d937588b866304cbc450c2.mp3str"
+
+[deps]
+
+source_file="res://BushTrim.mp3"
+dest_files=[ "res://.import/BushTrim.mp3-4eb5212de7d937588b866304cbc450c2.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

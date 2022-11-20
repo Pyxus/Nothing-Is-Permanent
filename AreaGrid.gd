@@ -56,7 +56,13 @@ func _draw() -> void:
 
 func get_grid_size():
 	return grid_size
-
+func no_remaining_spawns():
+	for x in grid_size.x:
+		var currCell = get_cell(x,0)
+		print(currCell)
+		if(not is_dead_cell(currCell)):
+			return false
+	return true
 func spawn_rose_bushes():
 	for y in grid_size.y:
 		for x in grid_size.x:
@@ -66,6 +72,7 @@ func spawn_rose_bushes():
 
 
 func set_dying(cell):
+	get_parent().get_node("Sizzle").play()
 	set_cell_texture(cell, preload("res://FloorTextures/dyingCell.png"))
 	
 func kill_cell(cell):
@@ -81,7 +88,7 @@ func set_cell_as_grass(cell):
 	
 	
 func is_dying_cell(cell):
-	if(cell.get_node("TextureRect").texture == preload("res://FloorTextures/dyingCell.png")):
+	if(not cell or cell.get_node("TextureRect").texture == preload("res://FloorTextures/dyingCell.png")):
 		return true
 	return false
 

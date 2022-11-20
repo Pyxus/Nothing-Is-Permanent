@@ -14,10 +14,16 @@ func player_touched_flower():
 	var spawnCell = null
 	var spawnX
 	var rng
+	var counter = 0
+	var array: Array = []
 	while(spawnCell == null):
 		rng = RandomNumberGenerator.new()
 		rng.randomize()
-		spawnX = rng.randf_range(0, areaGrid.get_grid_size().x)
+		spawnX = rng.randi_range(0, areaGrid.get_grid_size().x)
+		if not spawnX in array:
+			array.append(spawnX)
+		if array.size() >= areaGrid.get_grid_size().x:
+			kill_player()
 		spawnCell = areaGrid.get_cell(spawnX,0)
 		if(not areaGrid.is_spawn_cell(spawnCell)):
 			spawnCell = null

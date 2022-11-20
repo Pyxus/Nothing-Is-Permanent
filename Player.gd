@@ -69,6 +69,7 @@ func _physics_process(delta):
 
 func use_scissors():
 	if cutCount > 0:
+		get_parent().get_node("BushTrim").play()
 		$ScissorArea.monitoring = true
 		$ScissorArea.monitorable = true
 

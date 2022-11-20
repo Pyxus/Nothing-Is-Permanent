@@ -8,7 +8,6 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$CanvasLayer.get_node("TextureRect").visible = false
 	pass # Replace with function body.
 
 
@@ -17,20 +16,17 @@ func _ready():
 #	pass
 
 
+func _on_Start_pressed():
+	#replace scene with level 1
+	get_tree().change_scene("res://Level1.tscn") 
+	pass # Replace with function body.
 
 
+func _on_Quit_pressed():
+	get_tree().quit()
+	pass # Replace with function body.
 
 
-func _on_quit_pressed():
-	print ("game quit")
+func _on_Home_pressed():
 	get_tree().change_scene("res://menu.tscn")
 	pass # Replace with function body.
-
-
-func _on_retry_pressed():
-	print ("fresh start")
-	get_tree().change_scene("res://Level1.tscn")
-	pass # Replace with function body.
-
-func _on_VideoPlayer_finished():
-	$CanvasLayer.get_node("TextureRect").visible = true
