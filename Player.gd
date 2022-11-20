@@ -1,4 +1,7 @@
 extends KinematicBody2D
+
+const AreaGrid = preload("res://AreaGrid.gd")
+
 var moveSpeed : int = 250
 var defaultSpeed = 250
 var vel : Vector2 = Vector2()
@@ -6,10 +9,17 @@ var facingDir : Vector2 = Vector2()
 var hasKey = false
 var cutCount: int = 1
 
+
+func _ready() -> void:
+	$ScissorArea.connect("area_entered", self, "_on_ScissorArea_area_entered")
+
+
 func _physics_process(delta):
 	moveSpeed = defaultSpeed
 	all_sprites_invisible()
 	$Stop.visible = true
+	$ScissorArea.monitoring = false
+	$ScissorArea.monitorable = false
 	var vel = Vector2()
 	  
 	  # inputs
@@ -61,11 +71,7 @@ func use_scissors():
 	if cutCount > 0:
 		$ScissorArea.monitoring = true
 		$ScissorArea.monitorable = true
-		
-		# Will set to false on the next frame
-		$ScissorArea.set_deferred("monitoring", false)
-		$ScissorArea.set_deferred("monitorable", false)
-		cutCount -= 1
+
 
 func all_sprites_invisible():
 	$Stop.visible = false
@@ -76,3 +82,9 @@ func all_sprites_invisible():
 	
 func setKey(haveKey):
 	hasKey = haveKey
+
+
+func _on_ScissorArea_area_entered(area: Area2D) -> void:
+	if AreaGrid.is_dead_cell(area):
+		area.get_node("TextureRect").texture = preload("res://FloorTextures/000.png")
+		cutCount -= 1

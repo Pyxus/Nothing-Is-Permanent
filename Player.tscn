@@ -47,7 +47,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 0, 50 ) ]
+"values": [ Vector2( 0, 70 ) ]
 }
 
 [sub_resource type="Animation" id=4]
@@ -75,7 +75,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( -30, 2 ) ]
+"values": [ Vector2( -50, 2 ) ]
 }
 
 [sub_resource type="Animation" id=5]
@@ -104,7 +104,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 30, 0 ) ]
+"values": [ Vector2( 50, 0 ) ]
 }
 
 [sub_resource type="Animation" id=3]
@@ -133,7 +133,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 0, -50 ) ]
+"values": [ Vector2( 0, -70 ) ]
 }
 
 [sub_resource type="Animation" id=6]
@@ -154,7 +154,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 15.5, 31 )
+extents = Vector2( 15.5, 23 )
 
 [sub_resource type="RectangleShape2D" id=8]
 
@@ -171,7 +171,7 @@ anims/Walk_Up = SubResource( 3 )
 anims/stop = SubResource( 6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0.5, -1 )
+position = Vector2( 0.5, 7 )
 shape = SubResource( 1 )
 
 [node name="Walk_Left" type="Sprite" parent="."]
@@ -194,6 +194,7 @@ position = Vector2( 1, 1 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 4 )
 vframes = 4
+frame = 3
 
 [node name="Stop" type="Sprite" parent="."]
 position = Vector2( 1, 1 )
