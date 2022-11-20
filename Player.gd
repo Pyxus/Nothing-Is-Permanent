@@ -3,51 +3,61 @@ var moveSpeed : int = 250
 var defaultSpeed = 250
 var vel : Vector2 = Vector2()
 var facingDir : Vector2 = Vector2()
-
-var canDash = true
-var dashing = false
+var hasKey = false
 
 func _physics_process(delta):
 	moveSpeed = defaultSpeed
-  
+	all_sprites_invisible()
+	$Stop.visible = true
 	var vel = Vector2()
 	  
 	  # inputs
 	if Input.is_action_pressed("move_up"):
+		all_sprites_invisible()
+		$Walk_Up.visible = true
+		$AnimationPlayer.play("Walk_Up")
 		vel.y -= 1
 		facingDir = Vector2(0, -1)
 
-	if Input.is_action_pressed("move_down"):
+	elif Input.is_action_pressed("move_down"):
+		all_sprites_invisible()
+		$Walk_Backwards.visible = true
+		$AnimationPlayer.play("Walk_Down")
 		vel.y += 1
 		facingDir = Vector2(0, 1)
 
-	if Input.is_action_pressed("move_left"):
+	elif Input.is_action_pressed("move_left"):
+		all_sprites_invisible()
+		$Walk_Left.visible = true
+		$AnimationPlayer.play("Walk_Left")
 		vel.x -= 1
 		facingDir = Vector2(-1, 0)
 
-	if Input.is_action_pressed("move_right"):
+	elif Input.is_action_pressed("move_right"):
+		all_sprites_invisible()
+		$Walk_Right.visible = true
+		$AnimationPlayer.play("Walk_Right")
 		vel.x += 1
 		facingDir = Vector2(1, 0)
-	
-	if Input.is_action_pressed("dash") and canDash:
-		print("Dash")
-		vel = facingDir.normalized() *999999999999
-		canDash = false
-		dashing = true
-		yield(get_tree().create_timer(2), "timeout")
-		dashing = false
-		canDash = true
 	vel = vel.normalized()
 
 	# move the player
 	move_and_slide(vel * moveSpeed)
+		
 	for index in get_slide_count():
 		var collision = get_slide_collision(index)
-		print(collision)
-		if(collision.collider.name.begins_with("Platform")):
-			print("hello player")
+		if collision.collider.name.begins_with("Wall") and hasKey:
+			collision.collider.queue_free()
+			hasKey = false
+		if collision.collider.name.begins_with("Flower"):
+			get_parent().player_touched_flower()
 
-
-func _on_Platform_area_entered(area):
-	print("hello Player")
-	pass # Replace with function body.
+func all_sprites_invisible():
+	$Stop.visible = false
+	$Walk_Left.visible = false
+	$Walk_Right.visible = false
+	$Walk_Backwards.visible = false
+	$Walk_Up.visible = false
+	
+func setKey(haveKey):
+	hasKey = haveKey

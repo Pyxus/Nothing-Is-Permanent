@@ -14,7 +14,34 @@ func _draw() -> void:
 				var cell_pos := Vector2(x * cell_size.x, y * cell_size.y)
 				draw_rect(Rect2(cell_pos, cell_size), Color(randf(), randf(), randf(), .5))
 
+func get_grid_size():
+	return grid_size
 
+func spawn_rose_bushes():
+	for y in grid_size.y:
+		for x in grid_size.x:
+			var currCell = get_cell(x,y)
+			if currCell.modulate == Color.red:
+				kill_cell(currCell)
+
+func kill_cell(cell):
+	cell.modulate = Color.purple				
+
+func is_dead_cell(cell):
+	if(cell.modulate == Color.purple):
+		return true
+	return false
+
+func is_dying_cell(cell):
+	if(cell.modulate == Color.red):
+		return true
+	return false
+
+func is_spawn_cell(cell):
+	if(is_dying_cell(cell) or is_dead_cell(cell)):
+		return false
+	return true
+	
 func _ready() -> void:
 	if not Engine.editor_hint:
 		for y in grid_size.y:
