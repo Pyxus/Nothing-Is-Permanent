@@ -98,6 +98,7 @@ func _ready() -> void:
 				area.add_child(collision)
 				area.connect("body_entered", self, "_on_Area_body_entered", [Vector2(x, y)])
 				
+				texture_rect.name = "TextureRect"
 				texture_rect.texture = get_random_ground_texture()
 				texture_rect.expand = true
 				shape.extents = cell_size / 2
@@ -106,6 +107,16 @@ func _ready() -> void:
 				area.position = Vector2(x * cell_size.x, y * cell_size.y)
 				texture_rect.rect_size = cell_size
 
+
+func set_cell_texture(cell_x: int, cell_y: int, texture: Texture) -> void:
+	var area := get_cell(cell_x, cell_y)
+	if area == null:
+		push_error("Failed to get cell and coordinate (%d, %d)" % [cell_x, cell_y])
+		return
+	
+	area.get_node("TextureRect").texture = texture
+	
+	
 func get_random_ground_texture():
 	if TEXTURE_VARIATIONS_ARRAY.size() >1:
 		var texture_id: int = randi() % TEXTURE_VARIATIONS_ARRAY.size()
