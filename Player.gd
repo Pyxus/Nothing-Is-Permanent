@@ -1,14 +1,25 @@
 extends KinematicBody2D
+
+const AreaGrid = preload("res://AreaGrid.gd")
+
 var moveSpeed : int = 250
 var defaultSpeed = 250
 var vel : Vector2 = Vector2()
 var facingDir : Vector2 = Vector2()
 var hasKey = false
+var cutCount: int = 1
+
+
+func _ready() -> void:
+	$ScissorArea.connect("area_entered", self, "_on_ScissorArea_area_entered")
+
 
 func _physics_process(delta):
 	moveSpeed = defaultSpeed
 	all_sprites_invisible()
 	$Stop.visible = true
+	$ScissorArea.monitoring = false
+	$ScissorArea.monitorable = false
 	var vel = Vector2()
 	  
 	  # inputs
@@ -39,6 +50,10 @@ func _physics_process(delta):
 		$AnimationPlayer.play("Walk_Right")
 		vel.x += 1
 		facingDir = Vector2(1, 0)
+	
+	if Input.is_action_just_pressed("ui_select"):
+		use_scissors()
+
 	vel = vel.normalized()
 
 	# move the player
@@ -52,6 +67,12 @@ func _physics_process(delta):
 		if collision.collider.name.begins_with("Flower"):
 			get_parent().player_touched_flower()
 
+func use_scissors():
+	if cutCount > 0:
+		$ScissorArea.monitoring = true
+		$ScissorArea.monitorable = true
+
+
 func all_sprites_invisible():
 	$Stop.visible = false
 	$Walk_Left.visible = false
@@ -61,3 +82,9 @@ func all_sprites_invisible():
 	
 func setKey(haveKey):
 	hasKey = haveKey
+
+
+func _on_ScissorArea_area_entered(area: Area2D) -> void:
+	if AreaGrid.is_dead_cell(area):
+		area.get_node("TextureRect").texture = preload("res://FloorTextures/000.png")
+		cutCount -= 1

@@ -63,17 +63,23 @@ func spawn_rose_bushes():
 			var currCell = get_cell(x,y)
 			if is_dying_cell(currCell):
 				kill_cell(currCell)
+
+
 func set_dying(cell):
 	set_cell_texture(cell, preload("res://FloorTextures/dyingCell.png"))
 	
 func kill_cell(cell):
 	set_cell_texture(cell, preload("res://FloorTextures/deadCell.png"))			
 
-func is_dead_cell(cell):
+static func is_dead_cell(cell):
 	if(cell.get_node("TextureRect").texture == preload("res://FloorTextures/deadCell.png")):
 		return true
 	return false
 
+func set_cell_as_grass(cell):
+	cell.get_node("TextureRect").texture = get_random_ground_texture()
+	
+	
 func is_dying_cell(cell):
 	if(cell.get_node("TextureRect").texture == preload("res://FloorTextures/dyingCell.png")):
 		return true
