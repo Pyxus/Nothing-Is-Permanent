@@ -26,7 +26,7 @@ func player_touched_flower():
 
 func _on_AreaGrid_body_entered(body: PhysicsBody2D, coord: Vector2) -> void:
 	if body is Player:
-		if _area_grid.get_cell(coord.x, coord.y).modulate == Color.purple:
+		if _area_grid.is_dead_cell(_area_grid.get_cell(coord.x, coord.y)):
 			kill_player()
 		else:
 			_area_grid.set_dying(_area_grid.get_cell(coord.x, coord.y))

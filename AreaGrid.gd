@@ -61,21 +61,21 @@ func spawn_rose_bushes():
 	for y in grid_size.y:
 		for x in grid_size.x:
 			var currCell = get_cell(x,y)
-			if currCell.modulate == Color.red:
+			if is_dying_cell(currCell):
 				kill_cell(currCell)
 func set_dying(cell):
-	cell.modulate = Color.red
+	set_cell_texture(cell, preload("res://FloorTextures/dyingCell.png"))
 	
 func kill_cell(cell):
-	cell.modulate = Color.purple				
+	set_cell_texture(cell, preload("res://FloorTextures/deadCell.png"))			
 
 func is_dead_cell(cell):
-	if(cell.modulate == Color.purple):
+	if(cell.get_node("TextureRect").texture == preload("res://FloorTextures/deadCell.png")):
 		return true
 	return false
 
 func is_dying_cell(cell):
-	if(cell.modulate == Color.red):
+	if(cell.get_node("TextureRect").texture == preload("res://FloorTextures/dyingCell.png")):
 		return true
 	return false
 
@@ -108,13 +108,8 @@ func _ready() -> void:
 				texture_rect.rect_size = cell_size
 
 
-func set_cell_texture(cell_x: int, cell_y: int, texture: Texture) -> void:
-	var area := get_cell(cell_x, cell_y)
-	if area == null:
-		push_error("Failed to get cell and coordinate (%d, %d)" % [cell_x, cell_y])
-		return
-	
-	area.get_node("TextureRect").texture = texture
+func set_cell_texture(cell, texture: Texture) -> void:
+	cell.get_node("TextureRect").texture = texture
 	
 	
 func get_random_ground_texture():
