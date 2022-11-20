@@ -60,7 +60,7 @@ func _physics_process(delta):
 func use_scissors():
 	if cutCount > 0:
 		$ScissorArea.monitoring = true
-		$ScissorArea.monitorable = false
+		$ScissorArea.monitorable = true
 		
 		# Will set to false on the next frame
 		$ScissorArea.set_deferred("monitoring", false)
