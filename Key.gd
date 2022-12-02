@@ -23,5 +23,4 @@ func _ready():
 func _on_Key_body_entered(body):
 	if(body.name == "Player"):
 		body.setKey(true)
-	self.queue_free()
-	pass # Replace with function body.
+		self.queue_free()

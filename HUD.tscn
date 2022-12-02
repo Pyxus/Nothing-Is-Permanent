@@ -1,0 +1,38 @@
+[gd_scene format=2]
+
+[node name="HUD" type="CanvasLayer"]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+margin_left = 806.0
+margin_top = 14.0
+margin_right = 871.0
+margin_bottom = 33.0
+rect_scale = Vector2( 3, 3 )
+text = "x 0 Water"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="."]
+margin_left = 572.0
+margin_top = 14.0
+margin_right = 643.0
+margin_bottom = 47.0
+rect_scale = Vector2( 3, 3 )
+text = "x 0 Key
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="."]
+margin_left = 15.0
+margin_top = 14.0
+margin_right = 133.0
+margin_bottom = 47.0
+rect_scale = Vector2( 3, 3 )
+text = "x 1 Weed Cutter
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
