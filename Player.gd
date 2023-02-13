@@ -87,5 +87,5 @@ func setKey(haveKey):
 
 func _on_ScissorArea_area_entered(area: Area2D) -> void:
 	if AreaGrid.is_dead_cell(area):
-		area.get_node("TextureRect").texture = preload("res://FloorTextures/000.png")
+		area.get_node("TextureRect").texture = preload("res://Assets/FloorTextures/000.png")
 		cutCount -= 1

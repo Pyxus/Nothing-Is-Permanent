@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Sizzle (1).mp3-fbf706ca7227fdc6b2d1cd90da9402b6.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sizzle (1).mp3"
+dest_files=[ "res://.import/Sizzle (1).mp3-fbf706ca7227fdc6b2d1cd90da9402b6.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

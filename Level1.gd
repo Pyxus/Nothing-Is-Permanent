@@ -11,23 +11,12 @@ func _ready() -> void:
 
 func player_touched_flower():
 	var areaGrid = get_node("AreaGrid")
-	var spawnCell = null
-	var spawnX
-	var rng
-	var counter = 0
-	var array: Array = []
-	while(spawnCell == null):
-		rng = RandomNumberGenerator.new()
-		rng.randomize()
-		spawnX = rng.randi_range(0, areaGrid.get_grid_size().x)
-		if not spawnX in array:
-			array.append(spawnX)
-		if array.size() >= areaGrid.get_grid_size().x:
-			kill_player()
-		spawnCell = areaGrid.get_cell(spawnX,0)
-		if(not areaGrid.is_spawn_cell(spawnCell)):
-			spawnCell = null
-	$Player.position = spawnCell.position + Vector2(32,32)
+	
+	if(not areaGrid.hasSpawnCell()):
+		kill_player()
+		return
+		
+	$Player.position = getRandomSpawnPosition(areaGrid)
 	areaGrid.spawn_rose_bushes()
 
 func _on_AreaGrid_body_entered(body: PhysicsBody2D, coord: Vector2) -> void:
@@ -40,3 +29,17 @@ func _on_AreaGrid_body_entered(body: PhysicsBody2D, coord: Vector2) -> void:
 func kill_player():
 	get_tree().change_scene("res://game over screen.tscn")
 	pass
+
+func getRandomSpawnPosition(areaGrid):
+	var spawnCell = null
+	var spawnX
+	var rng
+
+	while(spawnCell == null):
+		rng = RandomNumberGenerator.new()
+		rng.randomize()
+		spawnX = rng.randi_range(0, areaGrid.get_grid_size().x)
+		spawnCell = areaGrid.get_cell(spawnX,0)
+		if(not areaGrid.is_spawn_cell(spawnCell)):
+			spawnCell = null
+	return spawnCell.position + Vector2(32,32)

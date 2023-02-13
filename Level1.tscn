@@ -1,16 +1,16 @@
 [gd_scene load_steps=18 format=2]
 
-[ext_resource path="res://icon.png" type="Texture" id=1]
+[ext_resource path="res://Assets/icon.png" type="Texture" id=1]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://AreaGrid.gd" type="Script" id=3]
 [ext_resource path="res://Level1.gd" type="Script" id=4]
 [ext_resource path="res://Flower.tscn" type="PackedScene" id=5]
-[ext_resource path="res://tileset/TX Tileset Grass.png" type="Texture" id=6]
-[ext_resource path="res://tileset/TX Tileset Wall.png" type="Texture" id=7]
-[ext_resource path="res://FloorTextures/floravarients.png" type="Texture" id=8]
-[ext_resource path="res://Gameplay_final.ogg" type="AudioStream" id=9]
-[ext_resource path="res://Sizzle (1).mp3" type="AudioStream" id=10]
-[ext_resource path="res://BushTrim.mp3" type="AudioStream" id=11]
+[ext_resource path="res://Assets/tileset/TX Tileset Grass.png" type="Texture" id=6]
+[ext_resource path="res://Assets/tileset/TX Tileset Wall.png" type="Texture" id=7]
+[ext_resource path="res://Assets/FloorTextures/floravarients.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Gameplay_final.ogg" type="AudioStream" id=9]
+[ext_resource path="res://Assets/Sizzle (1).mp3" type="AudioStream" id=10]
+[ext_resource path="res://Assets/BushTrim.mp3" type="AudioStream" id=11]
 
 [sub_resource type="RectangleShape2D" id=1]
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://arcadeclassic/ARCADECLASSIC.TTF" type="DynamicFontData" id=1]
-[ext_resource path="res://Title_Theme.ogg" type="AudioStream" id=2]
+[ext_resource path="res://Assets/Title_Theme.ogg" type="AudioStream" id=2]
 [ext_resource path="res://credits.gd" type="Script" id=3]
 
 [sub_resource type="DynamicFont" id=2]

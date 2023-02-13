@@ -6,56 +6,58 @@ signal body_entered(body, cell_coord)
 export var texture: Texture
 export var grid_size: Vector2 setget set_grid_size
 export var cell_size: Vector2 setget set_cell_size
+export var advanced_level_creation: bool = true
 export(Array,Texture) var TEXTURE_VARIATIONS_ARRAY: Array = [
-	preload("res://FloorTextures/000.png"),
-	preload("res://FloorTextures/001.png"),
-	preload("res://FloorTextures/002.png"),
-	preload("res://FloorTextures/003.png"),
-	preload("res://FloorTextures/004.png"),
-	preload("res://FloorTextures/005.png"),
-	preload("res://FloorTextures/006.png"),
-	preload("res://FloorTextures/007.png"),
-	preload("res://FloorTextures/008.png"),
-	preload("res://FloorTextures/009.png"),
-	preload("res://FloorTextures/010.png"),
-	preload("res://FloorTextures/011.png"),
-	preload("res://FloorTextures/012.png"),
-	preload("res://FloorTextures/013.png"),
-	preload("res://FloorTextures/014.png"),
-	preload("res://FloorTextures/015.png"),
-	preload("res://FloorTextures/016.png"),
-	preload("res://FloorTextures/017.png"),
-	preload("res://FloorTextures/018.png"),
-	preload("res://FloorTextures/019.png"),
-	preload("res://FloorTextures/020.png"),
-	preload("res://FloorTextures/021.png"),
-	preload("res://FloorTextures/022.png"),
-	preload("res://FloorTextures/023.png"),
-	preload("res://FloorTextures/024.png"),
-	preload("res://FloorTextures/025.png"),
-	preload("res://FloorTextures/026.png"),
-	preload("res://FloorTextures/027.png"),
-	preload("res://FloorTextures/028.png"),
-	preload("res://FloorTextures/029.png"),
-	preload("res://FloorTextures/030.png"),
-	preload("res://FloorTextures/031.png"),
-	preload("res://FloorTextures/033.png"),
-	preload("res://FloorTextures/034.png"),
-	preload("res://FloorTextures/035.png"),
-	preload("res://FloorTextures/036.png"),
-	preload("res://FloorTextures/037.png"),
-	preload("res://FloorTextures/038.png"),
-	preload("res://FloorTextures/039.png"),
+	preload("res://Assets/FloorTextures/000.png"),
+	preload("res://Assets/FloorTextures/001.png"),
+	preload("res://Assets/FloorTextures/002.png"),
+	preload("res://Assets/FloorTextures/003.png"),
+	preload("res://Assets/FloorTextures/004.png"),
+	preload("res://Assets/FloorTextures/005.png"),
+	preload("res://Assets/FloorTextures/006.png"),
+	preload("res://Assets/FloorTextures/007.png"),
+	preload("res://Assets/FloorTextures/008.png"),
+	preload("res://Assets/FloorTextures/009.png"),
+	preload("res://Assets/FloorTextures/010.png"),
+	preload("res://Assets/FloorTextures/011.png"),
+	preload("res://Assets/FloorTextures/012.png"),
+	preload("res://Assets/FloorTextures/013.png"),
+	preload("res://Assets/FloorTextures/014.png"),
+	preload("res://Assets/FloorTextures/015.png"),
+	preload("res://Assets/FloorTextures/016.png"),
+	preload("res://Assets/FloorTextures/017.png"),
+	preload("res://Assets/FloorTextures/018.png"),
+	preload("res://Assets/FloorTextures/019.png"),
+	preload("res://Assets/FloorTextures/020.png"),
+	preload("res://Assets/FloorTextures/021.png"),
+	preload("res://Assets/FloorTextures/022.png"),
+	preload("res://Assets/FloorTextures/023.png"),
+	preload("res://Assets/FloorTextures/024.png"),
+	preload("res://Assets/FloorTextures/025.png"),
+	preload("res://Assets/FloorTextures/026.png"),
+	preload("res://Assets/FloorTextures/027.png"),
+	preload("res://Assets/FloorTextures/028.png"),
+	preload("res://Assets/FloorTextures/029.png"),
+	preload("res://Assets/FloorTextures/030.png"),
+	preload("res://Assets/FloorTextures/031.png"),
+	preload("res://Assets/FloorTextures/033.png"),
+	preload("res://Assets/FloorTextures/034.png"),
+	preload("res://Assets/FloorTextures/035.png"),
+	preload("res://Assets/FloorTextures/036.png"),
+	preload("res://Assets/FloorTextures/037.png"),
+	preload("res://Assets/FloorTextures/038.png"),
+	preload("res://Assets/FloorTextures/039.png"),
 ]
+var level = [[1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1],[1,1]]
 func _draw() -> void:
 	if Engine.editor_hint:
 		for y in grid_size.y:
 			for x in grid_size.x:
 				var cell_pos := Vector2(x * cell_size.x, y * cell_size.y)
 				draw_rect(Rect2(cell_pos, cell_size), Color(randf(), randf(), randf(), .5))
-
 func get_grid_size():
 	return grid_size
+
 func no_remaining_spawns():
 	for x in grid_size.x:
 		var currCell = get_cell(x,0)
@@ -63,6 +65,7 @@ func no_remaining_spawns():
 		if(not is_dead_cell(currCell)):
 			return false
 	return true
+
 func spawn_rose_bushes():
 	for y in grid_size.y:
 		for x in grid_size.x:
@@ -70,16 +73,22 @@ func spawn_rose_bushes():
 			if is_dying_cell(currCell):
 				kill_cell(currCell)
 
+func hasSpawnCell():
+	for x in grid_size.x:
+		var currCell = get_cell(x,0)
+		if is_spawn_cell(currCell):
+			return true
+	return false
 
 func set_dying(cell):
 	get_parent().get_node("Sizzle").play()
-	set_cell_texture(cell, preload("res://FloorTextures/dyingCell.png"))
+	set_cell_texture(cell, preload("res://Assets/FloorTextures/dyingCell.png"))
 	
 func kill_cell(cell):
-	set_cell_texture(cell, preload("res://FloorTextures/deadCell.png"))			
+	set_cell_texture(cell, preload("res://Assets/FloorTextures/deadCell.png"))			
 
 static func is_dead_cell(cell):
-	if(cell.get_node("TextureRect").texture == preload("res://FloorTextures/deadCell.png")):
+	if(cell.get_node("TextureRect").texture == preload("res://Assets/FloorTextures/deadCell.png")):
 		return true
 	return false
 
@@ -88,7 +97,7 @@ func set_cell_as_grass(cell):
 	
 	
 func is_dying_cell(cell):
-	if(not cell or cell.get_node("TextureRect").texture == preload("res://FloorTextures/dyingCell.png")):
+	if(not cell or cell.get_node("TextureRect").texture == preload("res://Assets/FloorTextures/dyingCell.png")):
 		return true
 	return false
 
@@ -101,25 +110,28 @@ func _ready() -> void:
 	if not Engine.editor_hint:
 		for y in grid_size.y:
 			for x in grid_size.x:
-				var area := Area2D.new()
-				var collision := CollisionShape2D.new()
-				var shape := RectangleShape2D.new()
-				var texture_rect := TextureRect.new()
-				
-				add_child(area)
-				area.add_child(texture_rect)
-				area.add_child(collision)
-				area.connect("body_entered", self, "_on_Area_body_entered", [Vector2(x, y)])
-				
-				texture_rect.name = "TextureRect"
-				texture_rect.texture = get_random_ground_texture()
-				texture_rect.expand = true
-				shape.extents = cell_size / 2
-				collision.shape = shape
-				collision.position = cell_size / 2
-				area.position = Vector2(x * cell_size.x, y * cell_size.y)
-				texture_rect.rect_size = cell_size
+				create_cell(x, y)
+						
 
+func create_cell(x,y):
+	var area := Area2D.new()
+	var collision := CollisionShape2D.new()
+	var shape := RectangleShape2D.new()
+	var texture_rect := TextureRect.new()
+	
+	add_child(area)
+	area.add_child(texture_rect)
+	area.add_child(collision)
+	area.connect("body_entered", self, "_on_Area_body_entered", [Vector2(x, y)])
+	
+	texture_rect.name = "TextureRect"
+	texture_rect.texture = get_random_ground_texture()
+	texture_rect.expand = true
+	shape.extents = cell_size / 2
+	collision.shape = shape
+	collision.position = cell_size / 2
+	area.position = Vector2(x * cell_size.x, y * cell_size.y)
+	texture_rect.rect_size = cell_size
 
 func set_cell_texture(cell, texture: Texture) -> void:
 	cell.get_node("TextureRect").texture = texture
