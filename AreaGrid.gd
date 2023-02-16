@@ -48,13 +48,13 @@ export(Array,Texture) var TEXTURE_VARIATIONS_ARRAY: Array = [
 	preload("res://Assets/FloorTextures/038.png"),
 	preload("res://Assets/FloorTextures/039.png"),
 ]
-var level = [[1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1],[1,1]]
 func _draw() -> void:
-	if Engine.editor_hint:
-		for y in grid_size.y:
-			for x in grid_size.x:
-				var cell_pos := Vector2(x * cell_size.x, y * cell_size.y)
-				draw_rect(Rect2(cell_pos, cell_size), Color(randf(), randf(), randf(), .5))
+	if(not advanced_level_creation):
+		if Engine.editor_hint:
+			for y in grid_size.y:
+				for x in grid_size.x:
+					var cell_pos := Vector2(x * cell_size.x, y * cell_size.y)
+					draw_rect(Rect2(cell_pos, cell_size), Color(randf(), randf(), randf(), .5))
 func get_grid_size():
 	return grid_size
 

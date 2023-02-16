@@ -7,7 +7,8 @@ onready var _area_grid: AreaGrid = $AreaGrid
 
 
 func _ready() -> void:
-	_area_grid.connect("body_entered", self, "_on_AreaGrid_body_entered")
+	pass
+	#_area_grid.connect("body_entered", self, "_on_AreaGrid_body_entered")
 
 func player_touched_flower():
 	var areaGrid = get_node("AreaGrid")

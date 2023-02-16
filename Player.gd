@@ -65,7 +65,9 @@ func _physics_process(delta):
 			collision.collider.queue_free()
 			hasKey = false
 		if collision.collider.name.begins_with("Flower"):
-			get_parent().player_touched_flower()
+			if(get_parent().name == "Level1"):
+				get_parent().player_touched_flower()
+			
 
 func use_scissors():
 	if cutCount > 0:
@@ -89,3 +91,13 @@ func _on_ScissorArea_area_entered(area: Area2D) -> void:
 	if AreaGrid.is_dead_cell(area):
 		area.get_node("TextureRect").texture = preload("res://Assets/FloorTextures/000.png")
 		cutCount -= 1
+
+	pass # Replace with function body.
+
+
+
+
+
+func _on_Floor_area_entered(area):
+	print(area)
+	pass # Replace with function body.

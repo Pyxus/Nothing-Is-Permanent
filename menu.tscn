@@ -82,8 +82,8 @@ __meta__ = {
 layer = 0
 
 [node name="Country-platform-preview" type="Sprite" parent="CanvasLayer"]
-position = Vector2( 360, 261 )
-scale = Vector2( 3.67913, 3.67913 )
+position = Vector2( 961, 541 )
+scale = Vector2( 5.04688, 4.80357 )
 texture = ExtResource( 2 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
